@@ -1,0 +1,70 @@
+﻿@model Demo.Models.md_subcategory
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section">
+<div class="card">
+    <div class="card-header">
+
+        @{
+            if (TempData["alrt_msg"] != null)
+            {
+                var alrt_msg = Newtonsoft.Json.JsonConvert.DeserializeObject<ErrorViewModel>(TempData["alrt_msg"].ToString());
+                if (@alrt_msg != null)
+                {
+                    <div class="alert @alrt_msg.class_name mt-3 alert-dismissible show fade">
+                        @alrt_msg.Message
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+            }
+        }
+    </div>
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly"></div>
+        <form action="modifycategory" class="form-horizontal" method="post">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Sub-Category</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input class="form-control"
+                               type="hidden"
+                               asp-for="subcat_id"
+                               value="@Model.subcat_id" />
+                        <input class="form-control"
+                               type="text"
+                               asp-for="subcat_name"
+                               value="@Model.subcat_name" />
+                        <span asp-validation-for="subcat_name" class="text-danger customValidation"></span>
+                    </div>
+                   
+                </div>
+                <div class="row mt-5">
+                    <div class="col-md-3">
+                        <label>Category</label>
+                    </div>
+                    <div class="col-md-5">
+                        <select class="form-select" 
+                          onchange="getValueofcategory(event)"      
+                         asp-for="category.cat_id"
+                         asp-items="@(new SelectList(ViewBag.category, "cat_id", "catg_name",ViewBag.SelectedCategory as string))">
+                            <option value="">--Select--</option>
+                        </select>
+                        <span asp-validation-for="category.cat_id" class="text-danger customValidation"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 mt-3">
+                        <input type="submit" class="btn btn-primary btn-md" value="Save" />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</section>

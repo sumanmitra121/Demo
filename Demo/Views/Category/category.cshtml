@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Demo.Models.md_category>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Basic Tables start -->
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            @TempData["Title"]
+            <a class="btn btn-primary float-end"
+               asp-controller="Category"
+               asp-action="modifycategory"
+               asp-route-id="0">Add</a>
+            @{
+                if (TempData["alrt_msg"] != null)
+                {
+                    var alrt_msg = Newtonsoft.Json.JsonConvert.DeserializeObject<ErrorViewModel>(TempData["alrt_msg"].ToString());
+                    if (@alrt_msg != null)
+                    {
+                        <div class="alert @alrt_msg.class_name mt-5 alert-dismissible show fade">
+                            @alrt_msg.Message
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                }
+            }
+        </div>
+        <div class="card-body">
+            <table class="table" id="table1">
+                <thead>
+                    <tr>
+                        <th>Sl.no</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1;
+                        var msg = "'Sub-categories resides under this category, will also be deleted'";
+                        @foreach (var catg in Model)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@catg.catg_name</td>
+                                <td>
+                                    <a asp-controller="Category"
+                                       asp-action="modifycategory"
+                                       asp-route-id="@catg.cat_id"><i class="bi bi-pencil-square"></i></a>
+                                    <a onclick="deleteRow(@catg.cat_id,'/Category/deleteCategory',@msg)"
+                                        ><i class="bi bi-trash"></i></a>
+                                </td>
+
+                            </tr>
+                            i++;
+                        }
+                        }
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>

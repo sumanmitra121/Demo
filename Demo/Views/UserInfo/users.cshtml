@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Demo.Models.md_user>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- Basic Tables start -->
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            @TempData["Title"]
+        </div>
+        <div class="card-body">
+            <table class="table" id="table1">
+                <thead>
+                    <tr>
+                        <th>Sl.no</th>
+                        <th>Name</th>
+                        <th>username</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1;
+                        @foreach (var user in Model)
+                        {
+                            if (ViewBag.currentUser != @user.id)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@user.name</td>
+                                    <td>@user.username</td>
+                                    <td>@user.email</td>
+                                </tr>
+                                i++;
+
+                            }
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>

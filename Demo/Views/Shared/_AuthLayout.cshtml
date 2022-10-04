@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Demo</title>
+    <link rel="stylesheet" href="~/css/main/app.css">
+    <link rel="stylesheet" href="~/css/pages/auth.css">
+</head>
+<body>
+    <div id="auth">
+
+        <div class="row h-100">
+            <div class="col-lg-5 col-12">
+                <div id="auth-left">
+                    <div class="auth-logo">
+                        <a>
+                            <img src="~/images/logo/logo.svg" alt="Logo">
+                        </a>
+                    </div>
+                    @RenderBody()
+                </div>
+            </div>
+
+            <div class="col-lg-7 d-none d-lg-block"><div id="auth-right"></div></div>
+        </div>
+
+    </div>
+
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/app.js"></script>
+</body>
+</html>

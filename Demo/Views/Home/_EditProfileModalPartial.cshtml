@@ -1,0 +1,334 @@
+﻿@model Demo.DTO.md_profileDTO
+
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+     role="document">
+    <div class="modal-content">
+        <div class="modal-header bg-primary">
+            <h5 class="modal-title white" id="ProfileEdit">
+                Profile
+            </h5>
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
+                                       aria-controls="home" aria-selected="true">Edit Profile</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab"
+                                       aria-controls="contact" aria-selected="false">Change Password</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="image-tab" data-bs-toggle="tab" href="#image" role="tab"
+                                       aria-controls="iamge" aria-selected="false">Upload Image</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    @{
+                                        if (TempData["alrt_msg"] != null)
+                                        {
+                                            var alrt_msg = Newtonsoft.Json.JsonConvert.DeserializeObject<ErrorViewModel>(TempData["alrt_msg"].ToString());
+                                            if (@alrt_msg != null)
+                                            {
+                                                <div class="alert @alrt_msg.class_name alert-dismissible mt-3 show fade">
+                                                    @alrt_msg.Message
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                            }
+                                        }
+                                    }
+
+                                    <div asp-validation-summary="ModelOnly"></div>
+                                    <form id="EditProfile"
+                                          class="form-horizontal"
+                                          action="EditProfile">
+                                        <div class="form-body mt-3">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Name</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input asp-for="id"
+                                                           type="hidden"
+                                                           id="User_id"
+                                                           class="form-control"
+                                                           value="@Model.id">
+
+                                                    <input asp-for="name"
+                                                           type="text"
+                                                           id="Name"
+                                                           class="form-control"
+                                                           value="@Model.name"
+                                                           placeholder="Name">
+                                                    <span asp-validation-for="name" class="text-danger customValidation"></span>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Email</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input readonly
+                                                           value="@Model.email"
+                                                           type="email"
+                                                           asp-for="email"
+                                                           id="email-id"
+                                                           class="form-control"
+                                                           placeholder="Email">
+                                                    <span asp-validation-for="email" class="text-danger customValidation"></span>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>User Name</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input value="@Model.username"
+                                                           type="text"
+                                                           asp-for="username"
+                                                           id="userName"
+                                                           class="form-control"
+                                                           placeholder="Username">
+                                                    <span asp-validation-for="username" class="text-danger customValidation"></span>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Contact Number</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input value="@Model.phone_no"
+                                                           type="number" id="mobile"
+                                                           class="form-control"
+                                                           asp-for="phone_no"
+                                                           placeholder="Contact Number">
+                                                    <span asp-validation-for="phone_no" class="text-danger customValidation"></span>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="form-body mt-3">
+                                        <div class="row">
+                                            <div class="col-md-12 float-end">
+                                                <button type="button" class="float-end btn btn-primary ms-3"
+                                                        data-save="modal">
+                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Submit</span>
+                                                </button>
+                                                <button type="button" class="float-end  btn btn-light-secondary"
+                                                        data-bs-dismiss="modal">
+                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Close</span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+                                    @{
+                                        if (TempData["alrt_msg_pass"] != null)
+                                        {
+                                            var alrt_msg = Newtonsoft.Json.JsonConvert.DeserializeObject<ErrorViewModel>(TempData["alrt_msg_pass"].ToString());
+                                            if (@alrt_msg != null)
+                                            {
+                                                <div class="alert @alrt_msg.class_name alert-dismissible mt-3 show fade">
+                                                    @alrt_msg.Message
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                    <div asp-validation-summary="ModelOnly"></div>
+                                    <form id="EditPassword"
+                                          class="form-horizontal"
+                                          method="post"
+                                          action="EditPassword">
+                                        <div class="form-body mt-3">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Old Password</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input asp-for="id"
+                                                           type="hidden"
+                                                           id="USER_ID"
+                                                           class="form-control"
+                                                           value="@Model.id">
+                                                    <input asp-for="name"
+                                                           type="hidden"
+                                                           id="first-name"
+                                                           class="form-control"
+                                                           value="@Model.name"
+                                                           placeholder="Name">
+                                                    <input asp-for="email"
+                                                           type="hidden"
+                                                           id="EMAIL"
+                                                           class="form-control"
+                                                           value="@Model.email"
+                                                           placeholder="Email">
+                                                    <input asp-for="username"
+                                                           type="hidden"
+                                                           id="USERNAME"
+                                                           class="form-control"
+                                                           value="@Model.username"
+                                                           placeholder="User Name">
+                                                    <input asp-for="phone_no"
+                                                           type="hidden"
+                                                           id="PHONE_NO"
+                                                           class="form-control"
+                                                           value="@Model.phone_no"
+                                                           placeholder="Contact No">
+
+
+                                                    <input asp-for="password"
+                                                           type="password"
+                                                           id="old_pass"
+                                                           class="form-control"
+                                                           placeholder="Old Password">
+                                                    <span asp-validation-for="password"
+                                                          class="text-danger
+                                                              customValidation"></span>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>New Password</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input asp-for="new_password"
+                                                           type="password"
+                                                           id="new_pass"
+                                                           class="form-control"
+                                                           placeholder="New Password">
+                                                    <span asp-validation-for="new_password" class="text-danger customValidation"></span>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Confirm Password</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input asp-for="conf_password"
+                                                           type="password"
+                                                           id="conf_pass"
+                                                           class="form-control"
+                                                           placeholder="Confirm Password">
+                                                    <span asp-validation-for="conf_password" class="text-danger customValidation"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                    <div class="form-body mt-3">
+                                        <div class="row">
+                                            <div class="col-md-12 ">
+                                                <button type="button" class="float-end btn btn-primary ms-3"
+                                                        data-save="modal_pass">
+                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Submit</span>
+                                                </button>
+
+                                                <button type="button" class="float-end btn btn-light-secondary "
+                                                        data-bs-dismiss="modal">
+                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Close</span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="image-tab">
+                                    @{
+                                        if (TempData["alrt_msg_img"] != null)
+                                        {
+                                            var alrt_msg = Newtonsoft.Json.JsonConvert.DeserializeObject<ErrorViewModel>(TempData["alrt_msg_img"].ToString());
+                                            if (@alrt_msg != null)
+                                            {
+                                                <div class="alert @alrt_msg.class_name alert-dismissible mt-3 show fade">
+                                                    @alrt_msg.Message
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                            }
+                                        }
+                                    }
+
+                                    @{
+                                        if (Model.img_path != null)
+                                        {
+                                            <img class="customProfileImage rounded-circle" src="~/Uploads/@Model.id/@Model.img_path" />
+
+                                        }
+                                        else
+                                        {
+                                            <img class="customProfileImage rounded-circle" src="~/images/faces/1.jpg" />
+
+                                        }
+
+
+                                    }
+
+
+
+                                    <form id="UploadImage"
+                                          class="form-horizontal"
+                                          enctype="multipart/form-data"
+                                          action="UploadImage">
+                                        <div class="form-body mt-3">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Upload Image</label>
+
+                                                </div>
+                                                <div class="col-md-4 form-group">
+                                                    <input asp-for="id"
+                                                           type="hidden"
+                                                           name="id"
+                                                           id="idUser"
+                                                           class="form-control"
+                                                           value="@Model.id">
+                                                    <input asp-for="email"
+                                                           type="hidden"
+                                                           name="email"
+                                                           id="Email_user"
+                                                           class="form-control"
+                                                           value="@Model.email">
+                                                    <input type="file"
+                                                           id="Files"
+                                                           name="file"
+                                                           class="form-control" />
+                                                </div>
+
+                                                <div class="col-md-12 form-group">
+                                                    <button type="button" class="float-end btn btn-primary ms-3"
+                                                            data-save="modal_img">
+                                                        <i class="bx bx-check d-block d-sm-none"></i>
+                                                        <span class="d-none d-sm-block">Submit</span>
+                                                    </button>
+                                                    <button type="button" class="float-end  btn btn-light-secondary"
+                                                            data-bs-dismiss="modal">
+                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                        <span class="d-none d-sm-block">Close</span>
+                                                    </button>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

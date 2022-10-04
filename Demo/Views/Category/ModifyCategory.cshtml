@@ -1,0 +1,54 @@
+﻿@model Demo.Models.md_category
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+
+            @{
+                if (TempData["alrt_msg"] != null)
+                {
+                    var alrt_msg = Newtonsoft.Json.JsonConvert.DeserializeObject<ErrorViewModel>(TempData["alrt_msg"].ToString());
+                    if (@alrt_msg != null)
+                    {
+                        <div class="alert @alrt_msg.class_name mt-3 alert-dismissible show fade">
+                            @alrt_msg.Message
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                }
+            }
+        </div>
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly"></div>
+            <form action="modifycategory" class="form-horizontal" method="post">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                             <label>Category Name</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control"
+                                   type="hidden"
+                                   asp-for="cat_id"
+                                   value="@Model.cat_id" />
+                            <input class="form-control"
+                                   type="text"
+                                   asp-for="catg_name"
+                                   value="@Model.catg_name" />
+                            <span asp-validation-for="catg_name" class="text-danger customValidation"></span>
+                        </div>
+                        <div class="col-md-5 mt-3">
+                            <input type="submit" class="btn btn-primary btn-md" value="Save"/>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>

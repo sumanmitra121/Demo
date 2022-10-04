@@ -1,0 +1,22 @@
+﻿
+.customProfileImage {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    display: flex;
+    margin: 14px auto;
+}
+table{width:100%;}
+tr td, th.sorting {text-align: center !important;}
+
+body.theme-dark .swal2-styled.swal2-confirm {
+    background-color: rgb(67, 94, 190)!important;
+    margin: 0 5px!important;
+}
+.swal2-styled.swal2-cancel {
+    color: #5e5e5e !important;
+    background-color: rgb(231 231 231) !important;
+}
+body.theme-dark .swal2-styled.swal2-confirm:hover {
+    background-color: rgb(67, 94, 190) !important;
+}
